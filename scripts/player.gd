@@ -7,7 +7,7 @@ var direction_x := 0.0
 
 var can_shoot := true
 var facing_right := true
-var has_gun := true
+var has_gun := false
 
 signal shoot(pos: Vector2, facing_right: bool)
 
@@ -29,6 +29,7 @@ func get_input():
 		
 	if Input.is_action_just_pressed("shoot") and can_shoot:
 		can_shoot = false
+		print("shoot")
 		shoot.emit(global_position, facing_right)
 		cd_timer.start()
 	
