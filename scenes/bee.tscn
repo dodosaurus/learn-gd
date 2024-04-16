@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm1axy4s4y3sq"]
+
+[ext_resource type="Texture2D" uid="uid://jncwmvinfmq6" path="res://graphics/Enemies/bee/1.png" id="1_gnco4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u7js5"]
+radius = 3.0
+height = 8.0
+
+[node name="Bee" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gnco4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_u7js5")
