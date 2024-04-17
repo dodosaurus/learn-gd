@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpddogbwtn72w"]
+[gd_scene load_steps=9 format=3 uid="uid://cpddogbwtn72w"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_04k8b"]
 [ext_resource type="Texture2D" uid="uid://cwx54xyh7jofn" path="res://graphics/level/tilesets/level_tilemap.png" id="1_v8wme"]
 [ext_resource type="PackedScene" uid="uid://bibduk2bwawep" path="res://scenes/player.tscn" id="2_tkliw"]
 [ext_resource type="PackedScene" uid="uid://dm1axy4s4y3sq" path="res://scenes/bee.tscn" id="3_sr8fl"]
 [ext_resource type="PackedScene" uid="uid://6usmkcrdfo6n" path="res://scenes/gun.tscn" id="5_7r36c"]
+[ext_resource type="PackedScene" uid="uid://c72f28sh5qayb" path="res://scenes/worm.tscn" id="5_envsv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5d7su"]
 texture = ExtResource("1_v8wme")
@@ -124,6 +125,9 @@ position = Vector2(357, 215)
 
 [node name="Bee" parent="Enemies" instance=ExtResource("3_sr8fl")]
 position = Vector2(324, 214)
+
+[node name="Worm" parent="Enemies" instance=ExtResource("5_envsv")]
+position = Vector2(421, 203)
 
 [node name="Bullets" type="Node2D" parent="."]
 
