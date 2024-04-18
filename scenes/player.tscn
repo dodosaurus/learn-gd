@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bibduk2bwawep"]
+[gd_scene load_steps=11 format=3 uid="uid://bibduk2bwawep"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ctj0f"]
 [ext_resource type="Texture2D" uid="uid://ggnkxrdgwp6y" path="res://graphics/player/basic/idle.png" id="1_eon61"]
+[ext_resource type="Shader" path="res://shaders/flick.gdshader" id="2_x1rou"]
 [ext_resource type="Texture2D" uid="uid://trarvxrwnjsp" path="res://graphics/player/gun/idle.png" id="3_1fmdl"]
 [ext_resource type="Texture2D" uid="uid://baknl57csjt2o" path="res://graphics/player/basic/walk.png" id="3_b7ovw"]
 [ext_resource type="Texture2D" uid="uid://c7kiemdpj1k3u" path="res://graphics/player/gun/walk.png" id="5_28snr"]
@@ -10,6 +11,11 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lrbq6"]
 radius = 5.0
 height = 14.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rr7gh"]
+shader = ExtResource("2_x1rou")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/amount = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ne5dc"]
 animations = [{
@@ -91,7 +97,11 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="InvincibilityTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_rr7gh")
 sprite_frames = SubResource("SpriteFrames_ne5dc")
 animation = &"walk_gun"
 autoplay = "idle"
@@ -111,3 +121,4 @@ offset = Vector2(10, 2)
 
 [connection signal="timeout" from="Timers/CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
 [connection signal="timeout" from="Timers/FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="Timers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

@@ -3,12 +3,17 @@ extends CharacterBody2D
 
 var direction_x := 0.0
 @export var speed := 150
+
 @onready var cd_timer = $Timers/CooldownTimer
 @onready var fire_timer = $Timers/FireTimer
+@onready var invi_timer = $Timers/InvincibilityTimer
 
 var can_shoot := true
 var facing_right := true
 var has_gun := false
+var vulnerable := true
+
+var health := 10
 
 signal shoot(pos: Vector2, facing_right: bool)
 
@@ -63,3 +68,16 @@ func _on_cooldown_timer_timeout():
 func _on_fire_timer_timeout():
 	for child in $Fire.get_children():
 		child.hide()
+		
+func get_damage(amount):
+	if vulnerable: 
+		health -= amount
+		vulnerable = false
+		invi_timer.start()
+		print("player was damaged")
+		var tween = create_tween()
+		tween.tween_property($AnimatedSprite2D, "material:shader_parameter/amount", 1.0, 0.0)
+		tween.tween_property($AnimatedSprite2D, "material:shader_parameter/amount", 0.0, 0.1).set_delay(0.2)
+
+func _on_invincibility_timer_timeout():
+	vulnerable = true
